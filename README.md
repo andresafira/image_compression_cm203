@@ -1,93 +1,46 @@
-# Image_Compression_CM203_2023
+# Image Compression
+
+## Módulo fft
+
+
+Nesse módulo estão as implementações base das funções a serem utilizadas, bem como funções auxiliares para facilitar a implementação e legibilidade do código. A seguir está contida uma descrição das principais funções implementadas no módulo FFT:
+
+
+- [ ]  ```fft(x, inv=1)```: Função que realiza a transformada rápida de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo recursivo.
+
+- [ ] ```fft_inplace(x, inv=1)```: Função que realiza a transformada rápida de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo que realiza as transformadas no próprio vetor, sem utilizar recursão, o que otimiza o alocamento de memória.
+
+- [ ] ```fft2(img, tech)```: Função que realiza a transformada rápida de Fourier de um vetor bidimensional com tamanho correspondente a uma potência de dois, através do algoritmo escolhido por meio do seu parâmetro \texttt{tech}. Ela realiza a transformada primeiramente em suas linhas e posteriormente nas colunas do vetor.
+
+- [ ] ```ifft(X)```: Função que realiza a transforma rápida inversa de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo recursivo. Ele utiliza a implementação da ```fft()} utilizando o parâmetro $inv = -1$ e dividindo pelo tamanho do vetor no final.
+
+- [ ] ```ifft_inplace(X)```: Função que realiza a transforma rápida inversa de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo que realiza as transformadas no próprio vetor, sem utilizar recursão, o que otimiza o alocamento de memória. Ele utiliza a implementação da ```fft\_inplace()} utilizando o parâmetro $inv = -1$ e dividindo pelo tamanho do vetor no final.
+
+- [ ] ```ifft2(img, tech)```: Função que realiza a transformada rápida inversa de Fourier de um vetor bidimensional com tamanho correspondente a uma potência de dois, através do algoritmo escolhido por meio do seu parâmetro \texttt{tech}. A fim de inverter o efeito de ```fft2()} essa função realiza as transformadas inversas primeiro em relação às colunas e posteriomente em relação às linhas, divindo pelo tamanho do vetor no final.
 
 
 
-## Getting started
+## Módulo image
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Esse módulo é responsável por processar as imagens a fim de adequá-las para o estado de entrada nas técnicas de compressão, ajustar o estado de saída (removendo números complexos e ajustando o tipo de imagem), bem como realizar a operação de compressão e ajuste de canais de cores. As funções utilizadas serão listadas a seguir:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- [ ] ```type_adjustment(img)```: Realiza o ajuste da imagem de saída, a fim de limitar os valores no intervalo de cores de pixel suportados: $[0, 255]$, bem como ajustar o tipo de saída para $np.uint8$ que é um tipo aceito pela biblioteca de imagens $PIL$.
 
-## Add your files
+- [ ] ```expand(img)```: Expande as dimensões da imagem para as potências de dois mais próximas, a fim de usar as técnicas desenvolvidas. Os valores adicionados são 0 por padrão.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- [ ] ```contract(img, original_shape)```: Contrai a imagem, desfazendo a operação da função anterior.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/omisso/image_compression_cm203_2023.git
-git branch -M main
-git push -uf origin main
-```
+- [ ] ```compress(img, compression_factor, tech)```: Realiza a compressão da imagem com possivelmente mais de um canal de cor, segundo a técnica explicitada na Introdução deste trabalho utilizando o algoritmo especificado pelo parâmetro $tech$, que pode ser $recursive$ ou $inplace$.
 
-## Integrate with your tools
+- [ ] ```compress_monotone(img, compression_factor, tech)```: Realiza a compressão da imagem com exclusivamente um canal de cor (a imagem deve portanto ser unidimensional), segundo a técnica explicitada na Introdução deste trabalho utilizando o algoritmo especificado pelo parâmetro $tech$, que pode ser $recursive$ ou $inplace$.
 
-- [ ] [Set up project integrations](https://gitlab.com/omisso/image_compression_cm203_2023/-/settings/integrations)
 
-## Collaborate with your team
+## Módulo utils
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Esse módulo adicional contém a implementação de algumas funções não necessariamente relacionadas utilizadas em outros módulos a fim de facilitar a aplicação e legibilidade do código. As funções implementadas são:
 
-## Test and Deploy
+- [ ] ```get_inv_binary_associate(i, size)```: Calcula o número cuja representação binária ao contrário é igual à representação binária do parâmetro $i$. Essa função é utilizada para realizar a operação de inversão bit-a-bit utilizada no algoritmo $inplace$. O parâmetro $size$ é necessário pois algumas representações inversas podem ser diferentes, dependendo de quantos bits se tem para a alocação de um número, exemplo: $(0001)_2^{-1} = (1000)_2 \neq (1)_2 = (1)_2^{-1}$ por mais que $(0001)_2 = (1)_2$.
 
-Use the built-in continuous integration in GitLab.
+- [ ] ```swap(arr, index1, index2)```: Troca o conteúdo dos índices $index1$ e $index2$ do vetor $arr$.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- [ ] ```bitwise_invert(arr, n, log\_n)```: Realiza a operação de inversão bit-a-bit do vetor $arr$. Isso ocorre quando leva-se o conteúdo da posição $i$ para a posição cuja representação binária é o contrário da representação binária de $i$.
