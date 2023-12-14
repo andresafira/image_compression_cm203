@@ -10,13 +10,13 @@ Nesse módulo estão as implementações base das funções a serem utilizadas, 
 
 - [ ] ```fft_inplace(x, inv=1)```: Função que realiza a transformada rápida de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo que realiza as transformadas no próprio vetor, sem utilizar recursão, o que otimiza o alocamento de memória.
 
-- [ ] ```fft2(img, tech)```: Função que realiza a transformada rápida de Fourier de um vetor bidimensional com tamanho correspondente a uma potência de dois, através do algoritmo escolhido por meio do seu parâmetro \texttt{tech}. Ela realiza a transformada primeiramente em suas linhas e posteriormente nas colunas do vetor.
+- [ ] ```fft2(img, tech)```: Função que realiza a transformada rápida de Fourier de um vetor bidimensional com tamanho correspondente a uma potência de dois, através do algoritmo escolhido por meio do seu parâmetro *tech*. Ela realiza a transformada primeiramente em suas linhas e posteriormente nas colunas do vetor.
 
-- [ ] ```ifft(X)```: Função que realiza a transforma rápida inversa de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo recursivo. Ele utiliza a implementação da ```fft()} utilizando o parâmetro $inv = -1$ e dividindo pelo tamanho do vetor no final.
+- [ ] ```ifft(X)```: Função que realiza a transforma rápida inversa de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo recursivo. Ele utiliza a implementação da ```fft()``` utilizando o parâmetro $inv = -1$ e dividindo pelo tamanho do vetor no final.
 
-- [ ] ```ifft_inplace(X)```: Função que realiza a transforma rápida inversa de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo que realiza as transformadas no próprio vetor, sem utilizar recursão, o que otimiza o alocamento de memória. Ele utiliza a implementação da ```fft\_inplace()} utilizando o parâmetro $inv = -1$ e dividindo pelo tamanho do vetor no final.
+- [ ] ```ifft_inplace(X)```: Função que realiza a transforma rápida inversa de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo que realiza as transformadas no próprio vetor, sem utilizar recursão, o que otimiza o alocamento de memória. Ele utiliza a implementação da ```fft_inplace()``` utilizando o parâmetro $inv = -1$ e dividindo pelo tamanho do vetor no final.
 
-- [ ] ```ifft2(img, tech)```: Função que realiza a transformada rápida inversa de Fourier de um vetor bidimensional com tamanho correspondente a uma potência de dois, através do algoritmo escolhido por meio do seu parâmetro \texttt{tech}. A fim de inverter o efeito de ```fft2()} essa função realiza as transformadas inversas primeiro em relação às colunas e posteriomente em relação às linhas, divindo pelo tamanho do vetor no final.
+- [ ] ```ifft2(img, tech)```: Função que realiza a transformada rápida inversa de Fourier de um vetor bidimensional com tamanho correspondente a uma potência de dois, através do algoritmo escolhido por meio do seu parâmetro *tech*. A fim de inverter o efeito de ```fft2()´´´ essa função realiza as transformadas inversas primeiro em relação às colunas e posteriomente em relação às linhas, divindo pelo tamanho do vetor no final.
 
 
 
@@ -43,4 +43,4 @@ Esse módulo adicional contém a implementação de algumas funções não neces
 
 - [ ] ```swap(arr, index1, index2)```: Troca o conteúdo dos índices $index1$ e $index2$ do vetor $arr$.
 
-- [ ] ```bitwise_invert(arr, n, log\_n)```: Realiza a operação de inversão bit-a-bit do vetor $arr$. Isso ocorre quando leva-se o conteúdo da posição $i$ para a posição cuja representação binária é o contrário da representação binária de $i$.
+- [ ] ```bitwise_invert(arr, n, log_n)```: Realiza a operação de inversão bit-a-bit do vetor $arr$. Isso ocorre quando leva-se o conteúdo da posição $i$ para a posição cuja representação binária é o contrário da representação binária de $i$.
