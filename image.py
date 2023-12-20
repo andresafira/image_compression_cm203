@@ -85,4 +85,4 @@ def compress_monotone(img: np.ndarray, compression_factor: float, tech: str = "r
     # Revert the transformation and contract the image to its original shape
     IF_img = ifft2(compressed_img, tech)
     final_img = contract(IF_img, original_shape)
-    return final_img.real
+    return type_adjustment(final_img.real)
