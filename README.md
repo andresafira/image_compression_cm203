@@ -1,46 +1,44 @@
 # Image Compression
 
-## Módulo fft
+## fft Module
 
+In this module, the basic implementations of functions to be used are included, along with auxiliary functions to facilitate code implementation and readability. Below is a description of the main functions implemented in the FFT module:
 
-Nesse módulo estão as implementações base das funções a serem utilizadas, bem como funções auxiliares para facilitar a implementação e legibilidade do código. A seguir está contida uma descrição das principais funções implementadas no módulo FFT:
+- [ ]  ```fft(x, inv=1)```: Function that performs the fast Fourier transform of a one-dimensional vector with a size corresponding to a power of two, using the recursive algorithm.
 
+- [ ] ```fft_inplace(x, inv=1)```: Function that performs the fast Fourier transform of a one-dimensional vector with a size corresponding to a power of two, using the algorithm that performs the transforms in the vector itself, without using recursion, optimizing memory allocation.
 
-- [ ]  ```fft(x, inv=1)```: Função que realiza a transformada rápida de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo recursivo.
+- [ ] ```fft2(img, tech)```: Function that performs the fast Fourier transform of a two-dimensional vector with a size corresponding to a power of two, using the algorithm chosen through its parameter *tech*. It first performs the transform on its rows and then on the columns of the vector.
 
-- [ ] ```fft_inplace(x, inv=1)```: Função que realiza a transformada rápida de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo que realiza as transformadas no próprio vetor, sem utilizar recursão, o que otimiza o alocamento de memória.
+- [ ] ```ifft(X)```: Function that performs the fast inverse Fourier transform of a one-dimensional vector with a size corresponding to a power of two, using the recursive algorithm. It uses the implementation of ```fft()``` with the parameter $inv = -1$ and divides by the size of the vector at the end.
 
-- [ ] ```fft2(img, tech)```: Função que realiza a transformada rápida de Fourier de um vetor bidimensional com tamanho correspondente a uma potência de dois, através do algoritmo escolhido por meio do seu parâmetro *tech*. Ela realiza a transformada primeiramente em suas linhas e posteriormente nas colunas do vetor.
+- [ ] ```ifft_inplace(X)```: Function that performs the fast inverse Fourier transform of a one-dimensional vector with a size corresponding to a power of two, using the algorithm that performs the transforms in the vector itself, without using recursion, optimizing memory allocation. It uses the implementation of ```fft_inplace()``` with the parameter $inv = -1$ and divides by the size of the vector at the end.
 
-- [ ] ```ifft(X)```: Função que realiza a transforma rápida inversa de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo recursivo. Ele utiliza a implementação da ```fft()``` utilizando o parâmetro $inv = -1$ e dividindo pelo tamanho do vetor no final.
-
-- [ ] ```ifft_inplace(X)```: Função que realiza a transforma rápida inversa de Fourier de um vetor unidimensional com tamanho correspondente a uma potência de dois, através do algoritmo que realiza as transformadas no próprio vetor, sem utilizar recursão, o que otimiza o alocamento de memória. Ele utiliza a implementação da ```fft_inplace()``` utilizando o parâmetro $inv = -1$ e dividindo pelo tamanho do vetor no final.
-
-- [ ] ```ifft2(img, tech)```: Função que realiza a transformada rápida inversa de Fourier de um vetor bidimensional com tamanho correspondente a uma potência de dois, através do algoritmo escolhido por meio do seu parâmetro *tech*. A fim de inverter o efeito de ```fft2()´´´ essa função realiza as transformadas inversas primeiro em relação às colunas e posteriomente em relação às linhas, divindo pelo tamanho do vetor no final.
+- [ ] ```ifft2(img, tech)```: Function that performs the fast inverse Fourier transform of a two-dimensional vector with a size corresponding to a power of two, using the algorithm chosen through its parameter *tech*. To reverse the effect of ```fft2()```, this function first performs the inverse transforms with respect to the columns and then with respect to the rows, dividing by the size of the vector at the end.
 
 
 
-## Módulo image
+## image Module
 
-Esse módulo é responsável por processar as imagens a fim de adequá-las para o estado de entrada nas técnicas de compressão, ajustar o estado de saída (removendo números complexos e ajustando o tipo de imagem), bem como realizar a operação de compressão e ajuste de canais de cores. As funções utilizadas serão listadas a seguir:
+This module is responsible for processing images to prepare them for compression techniques, adjusting the output state (removing complex numbers and adjusting the image type), as well as performing compression and color channel adjustments. The functions used are listed below:
 
-- [ ] ```type_adjustment(img)```: Realiza o ajuste da imagem de saída, a fim de limitar os valores no intervalo de cores de pixel suportados: $[0, 255]$, bem como ajustar o tipo de saída para $np.uint8$ que é um tipo aceito pela biblioteca de imagens $PIL$.
+- [ ] ```type_adjustment(img)```: Adjusts the output image to limit values to the supported pixel color range: $[0, 255]$, and adjusts the output type to $np.uint8$, which is accepted by the PIL image library.
 
-- [ ] ```expand(img)```: Expande as dimensões da imagem para as potências de dois mais próximas, a fim de usar as técnicas desenvolvidas. Os valores adicionados são 0 por padrão.
+- [ ] ```expand(img)```: Expands the dimensions of the image to the nearest power of two, to use the developed techniques. The added values are 0 by default.
 
-- [ ] ```contract(img, original_shape)```: Contrai a imagem, desfazendo a operação da função anterior.
+- [ ] ```contract(img, original_shape)```: Contracts the image, undoing the operation of the previous function.
 
-- [ ] ```compress(img, compression_factor, tech)```: Realiza a compressão da imagem com possivelmente mais de um canal de cor, segundo a técnica explicitada na Introdução deste trabalho utilizando o algoritmo especificado pelo parâmetro $tech$, que pode ser $recursive$ ou $inplace$.
+- [ ] ```compress(img, compression_factor, tech)```: Performs compression of the image with possibly more than one color channel, according to the technique specified in the Introduction using the algorithm specified by the $tech$ parameter, which can be $recursive$ or $inplace$.
 
-- [ ] ```compress_monotone(img, compression_factor, tech)```: Realiza a compressão da imagem com exclusivamente um canal de cor (a imagem deve portanto ser unidimensional), segundo a técnica explicitada na Introdução deste trabalho utilizando o algoritmo especificado pelo parâmetro $tech$, que pode ser $recursive$ ou $inplace$.
+- [ ] ```compress_monotone(img, compression_factor, tech)```: Performs compression of the image with exclusively one color channel (the image must be one-dimensional), according to the technique specified in the Introduction using the algorithm specified by the $tech$ parameter, which can be $recursive$ or $inplace$.
 
 
-## Módulo utils
+## utils Module
 
-Esse módulo adicional contém a implementação de algumas funções não necessariamente relacionadas utilizadas em outros módulos a fim de facilitar a aplicação e legibilidade do código. As funções implementadas são:
+This additional module contains the implementation of some functions not necessarily related, used in other modules to facilitate code application and readability. The implemented functions are:
 
-- [ ] ```get_inv_binary_associate(i, size)```: Calcula o número cuja representação binária ao contrário é igual à representação binária do parâmetro $i$. Essa função é utilizada para realizar a operação de inversão bit-a-bit utilizada no algoritmo $inplace$. O parâmetro $size$ é necessário pois algumas representações inversas podem ser diferentes, dependendo de quantos bits se tem para a alocação de um número, exemplo: $(0001)_2^{-1} = (1000)_2 \neq (1)_2 = (1)_2^{-1}$ por mais que $(0001)_2 = (1)_2$.
+- [ ] ```get_inv_binary_associate(i, size)```: Calculates the number whose binary representation reversed is equal to the binary representation of the parameter $i$. This function is used to perform the bitwise inversion operation used in the inplace algorithm. The $size$ parameter is necessary because some inverse representations may be different, depending on how many bits are available for number allocation, for example: $(0001)_2^{-1} = (1000)_2 \neq (1)_2 = (1)_2^{-1}$ even though $(0001)_2 = (1)_2$.
 
-- [ ] ```swap(arr, index1, index2)```: Troca o conteúdo dos índices $index1$ e $index2$ do vetor $arr$.
+- [ ] ```swap(arr, index1, index2)```: Swaps the content of indices $index1$ and $index2$ of the array $arr$.
 
-- [ ] ```bitwise_invert(arr, n, log_n)```: Realiza a operação de inversão bit-a-bit do vetor $arr$. Isso ocorre quando leva-se o conteúdo da posição $i$ para a posição cuja representação binária é o contrário da representação binária de $i$.
+- [ ] ```bitwise_invert(arr, n, log_n)```: Performs the bitwise inversion operation on the array $arr$. This occurs when the content of position $i$ is moved to the position whose binary representation is the reverse of the binary representation of $i$.
